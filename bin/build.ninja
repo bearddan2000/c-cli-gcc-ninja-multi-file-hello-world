@@ -1,0 +1,15 @@
+rule cc_header
+  command = gcc -L /workspace/greeting.h -c $in -o $out
+  description = CC $out
+
+rule cc
+  command = gcc -c $in -o $out
+  description = CC $out
+
+rule link
+  command = gcc -o $out $in
+  description = LINK $out
+
+build greeting.o: cc_header greeting.c
+build main.o: cc main.c
+build main: link main.o greeting.o
